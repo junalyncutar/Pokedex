@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pokedex_colors">
+        <item>@color/Grass</item>
+        <item>@color/Fire</item>
+        <item>@color/Flying</item>
+        <item>@color/Water</item>
+        <item>@color/Bug</item>
+        <item>@color/Normal</item>
+    </array>
+</resources>

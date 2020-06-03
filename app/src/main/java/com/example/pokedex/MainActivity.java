@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,15 +17,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String URL_DATA = "https://pokeapi.co/api/v2/pokemon/";
+    private static final String URL_DATA = "https://pokeapi.co/api/v2/pokemon/?limit=50";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<PokedexItem> listItems;
+    private List<PokedexListModel> listItems;
+
+    // Stats
+    private RecyclerView statsRV;
+    private RecyclerViewStatsAdapter statsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         listItems = new ArrayList<>();
 
         loadRecyclerViewData();
-
     }
 
     private void loadRecyclerViewData() {
@@ -60,16 +62,14 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject o = array.getJSONObject(i);
 
-                                //JSONObject p = o.getJSONObject("ability");
-
-                                PokedexItem item = new PokedexItem(
+                                PokedexListModel item = new PokedexListModel(
                                         o.getString("name"),
                                         o.getString("url")
                                 );
                                 listItems.add(item);
                             }
 
-                            adapter = new MyAdapter(listItems, getApplicationContext());
+                            adapter = new RecyclerViewAdapter(listItems, getApplicationContext());
                             recyclerView.setAdapter(adapter);
 
                         } catch (JSONException e) {
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 

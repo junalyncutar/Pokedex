@@ -1,11 +1,11 @@
 package com.example.pokedex;
 
-public class PokedexItem {
+public class PokedexListModel {
 
     private String pokeName;
     private String pokeUrl;
 
-    public PokedexItem(String pokeName, String pokeUrl) {
+    public PokedexListModel(String pokeName, String pokeUrl) {
         this.pokeName = pokeName;
         this.pokeUrl = pokeUrl;
     }

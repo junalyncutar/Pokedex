@@ -2,6 +2,7 @@ package com.example.pokedex;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<PokedexItem> listItems;
+    private List<PokedexListModel> listItems;
     private Context context;
 
-    public MyAdapter(List<PokedexItem> listItems, Context context) {
+    public RecyclerViewAdapter(List<PokedexListModel> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -34,7 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final PokedexItem listItem = listItems.get(position);
+        final PokedexListModel listItem = listItems.get(position);
         final int pokeIndex = position+1;
 
         // Format to 3 digits 000
@@ -56,13 +58,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View v) {
                 Toast.makeText(context, "You clicked " + nameStr,Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(v.getContext(), PokedexDetail.class);
+                Intent intent = new Intent(context, PokedexDetail.class);
                 intent.putExtra("poke_id",String.format("#%03d",pokeIndex));
                 intent.putExtra("poke_url",listItem.getPokeUrl());
                 intent.putExtra("poke_name",nameStr);
                 v.getContext().startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -76,6 +79,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView textViewName;
         public ImageView imageViewUrl;
         public ConstraintLayout constraintLayout;
+        public RecyclerView rc;
+        Context context;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textViewName = (TextView) itemView.findViewById(R.id.textViewName);
             imageViewUrl = (ImageView) itemView.findViewById(R.id.imageViewUrl);
             constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.constraintLayout);
+            context = itemView.getContext();
         }
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Pokedex</string>
+    <string name="stats_text_name">Stats</string>
+    <string name="abilities_text_name">Abilities</string>
 </resources>

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#FF0000</color>
     <color name="colorPrimaryDark">#CC0000</color>
     <color name="colorAccent">#e7e7e7</color>
+    <color name="Grass">#00C92E</color>
+    <color name="Fire">#FF8728</color>
+    <color name="Flying">#00E0FF</color>
+    <color name="Water">#28A1FF</color>
+    <color name="Bug">#E528FF</color>
+    <color name="Normal">#FFEB28</color>
 </resources>
